@@ -16,11 +16,15 @@ public class FirebaseConfig {
     @Value("${firebase.database.url}")
     private String databaseUrl;
 
+    // 1. Añadimos esta nueva variable para leer la ruta del archivo
+    @Value("${firebase.config.path}")
+    private String firebaseConfigPath;
+
     @PostConstruct
     public void initFirebase() {
         try {
-            // Lee el archivo JSON desde la carpeta resources
-            InputStream serviceAccount = new ClassPathResource("firebase-service-account.json").getInputStream();
+            // 2. Usamos FileInputStream con la ruta externa en lugar de ClassPathResource
+            InputStream serviceAccount = new FileInputStream(firebaseConfigPath);
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -30,7 +34,7 @@ public class FirebaseConfig {
             // Evitamos inicializarlo dos veces si Spring reinicia el contexto
             if (FirebaseApp.getApps().isEmpty()) {
                 FirebaseApp.initializeApp(options);
-                System.out.println("🔥 ¡Conexión con Firebase Realtime Database establecida!");
+                System.out.println("🔥 ¡Conexión con Firebase Realtime Database establecida con éxito!");
             }
         } catch (Exception e) {
             System.err.println("❌ Error al inicializar Firebase: " + e.getMessage());
