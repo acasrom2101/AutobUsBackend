@@ -20,7 +20,7 @@ public class EmailService {
             String texto = "¡Gracias por tu compra!\n\n" +
                            "Tu pago se ha procesado correctamente. Puedes ver, descargar y presentar " +
                            "tu billete (con su código QR) entrando en el siguiente enlace:\n\n" +
-                           "http://localhost:4200/pago-completado?payment_intent=" + paymentIntentId + "\n\n" +
+                           "https://autobus-cipo.onrender.com/pago-completado?payment_intent=" + paymentIntentId + "\n\n" +
                            "¡Buen viaje!";
             
             message.setText(texto);
