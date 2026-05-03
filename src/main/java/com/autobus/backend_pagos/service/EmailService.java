@@ -14,6 +14,7 @@ public class EmailService {
     public void enviarCorreoBillete(String destinatario, String paymentIntentId) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("acasrom2101@iescarrillo.es");
             message.setTo(destinatario);
             message.setSubject("Tu billete de autobús - Compra Confirmada");
             
