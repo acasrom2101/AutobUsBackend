@@ -23,6 +23,7 @@ public class FirebaseConfig {
 
     @PostConstruct
     public void initFirebase() {
+        System.setProperty("java.net.preferIPv4Stack", "true");
         try {
             // 2. Usamos FileInputStream con la ruta externa en lugar de ClassPathResource
             InputStream serviceAccount = new FileInputStream(firebaseConfigPath);
